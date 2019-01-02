@@ -5,7 +5,8 @@ import java.io.IOException;
 
 /*****************************************************************************
  * A profile source for Firefox profiles.
- * 
+ *
+ * @author Franz Bartlechner, Copyright 2019
  * @author Markus Bernhardt, Copyright 2016
  * @author Bernd Rosstauscher, Copyright 2009
  ****************************************************************************/
@@ -20,6 +21,5 @@ interface FirefoxProfileSource {
 	 *             on error.
 	 ************************************************************************/
 
-	public File getProfilesIni() throws IOException;
-
+	File getProfilesIni() throws IOException;
 }

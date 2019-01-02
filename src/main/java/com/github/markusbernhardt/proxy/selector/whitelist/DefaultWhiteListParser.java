@@ -29,7 +29,8 @@ import com.github.markusbernhardt.proxy.util.UriFilter;
  * 
  * Note that this implementation does not cover all variations of all browsers
  * but should cover the most used formats.
- * 
+ *
+ * @author Franz Bartlechner, Copyright 2019
  * @author Markus Bernhardt, Copyright 2016
  * @author Bernd Rosstauscher, Copyright 2009
  ****************************************************************************/
@@ -45,25 +46,26 @@ public class DefaultWhiteListParser implements WhiteListParser {
 	public List<UriFilter> parseWhiteList(String whiteList) {
 		List<UriFilter> result = new ArrayList<UriFilter>();
 
-		String[] token = whiteList.split("[, ]+");
-		for (int i = 0; i < token.length; i++) {
-			String tkn = token[i].trim();
-			if (isIP4SubnetFilter(tkn) || isIP6SubnetFilter(tkn)) {
-				result.add(new IpRangeFilter(tkn));
-				continue;
-			} else if (tkn.endsWith("*")) {
-				tkn = tkn.substring(0, tkn.length() - 1);
-				result.add(new HostnameFilter(Mode.BEGINS_WITH, tkn));
-				continue;
-			} else if (tkn.trim().startsWith("*")) {
-				tkn = tkn.substring(1);
-				result.add(new HostnameFilter(Mode.ENDS_WITH, tkn));
-			} else if (tkn.trim().equals("<local>")) {
-				result.add(new IELocalByPassFilter());
-			} else {
-				result.add(new HostnameFilter(Mode.ENDS_WITH, tkn));
-			}
-		}
+    for (String s : whiteList.split("[, ]+")) {
+      String tkn = s.trim();
+      if (isIP4SubnetFilter(tkn) || isIP6SubnetFilter(tkn)) {
+        result.add(new IpRangeFilter(tkn));
+      }
+      else if (tkn.endsWith("*")) {
+        tkn = tkn.substring(0,tkn.length() - 1);
+        result.add(new HostnameFilter(Mode.BEGINS_WITH,tkn));
+      }
+      else if (tkn.trim().startsWith("*")) {
+        tkn = tkn.substring(1);
+        result.add(new HostnameFilter(Mode.ENDS_WITH,tkn));
+      }
+      else if (tkn.trim().equals("<local>")) {
+        result.add(new IELocalByPassFilter());
+      }
+      else {
+        result.add(new HostnameFilter(Mode.ENDS_WITH,tkn));
+      }
+    }
 
 		return result;
 	}

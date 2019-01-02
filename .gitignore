@@ -4,5 +4,8 @@
 .classpath
 bin/
 
+# Intellij
+.idea
+
 # Maven
 target/

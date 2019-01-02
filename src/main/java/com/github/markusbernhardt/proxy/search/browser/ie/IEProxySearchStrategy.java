@@ -19,6 +19,7 @@ import com.sun.jna.platform.win32.WinDef.DWORD;
  * Extracts the proxy settings for Microsoft Internet Explorer. The settings are
  * read by invoking native Windows API methods.
  *
+ * @author Franz Bartlechner, Copyright 2019
  * @author Bernd Rosstauscher (proxyvole@rosstauscher.de) Copyright 2009
  ****************************************************************************/
 
@@ -84,7 +85,7 @@ public class IEProxySearchStrategy extends CommonWindowsSearchStrategy {
 	/*************************************************************************
 	 * Parses the settings and creates an PAC ProxySelector for it.
 	 * 
-	 * @param ieSettings
+	 * @param ieProxyConfig
 	 *            the IE settings to use.
 	 * @return a PacProxySelector the selector or null.
 	 ************************************************************************/
@@ -120,7 +121,7 @@ public class IEProxySearchStrategy extends CommonWindowsSearchStrategy {
 	/*************************************************************************
 	 * Parses the proxy settings into an ProxySelector.
 	 * 
-	 * @param ieSettings
+	 * @param ieProxyConfig
 	 *            the settings to use.
 	 * @return a ProxySelector, null if no settings are set.
 	 * @throws ProxyException
@@ -140,8 +141,6 @@ public class IEProxySearchStrategy extends CommonWindowsSearchStrategy {
 
 		ProtocolDispatchSelector ps = buildProtocolDispatchSelector(p);
 
-		ProxySelector result = setByPassListOnSelector(bypassList, ps);
-		return result;
+    return setByPassListOnSelector(bypassList, ps);
 	}
-
 }

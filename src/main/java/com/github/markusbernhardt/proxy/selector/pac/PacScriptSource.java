@@ -5,6 +5,7 @@ import java.io.IOException;
 /*****************************************************************************
  * An source to fetch the PAC script from.
  *
+ * @author Franz Bartlechner, Copyright 2019
  * @author Markus Bernhardt, Copyright 2016
  * @author Bernd Rosstauscher, Copyright 2009
  ****************************************************************************/
@@ -19,7 +20,7 @@ public interface PacScriptSource {
 	 *             on read error.
 	 ************************************************************************/
 
-	public String getScriptContent() throws IOException;
+	String getScriptContent() throws IOException;
 
 	/*************************************************************************
 	 * Checks if the content of the script is valid and if it is possible to use
@@ -29,6 +30,5 @@ public interface PacScriptSource {
 	 * @return true if everything is fine, else false.
 	 ************************************************************************/
 
-	public boolean isScriptValid();
-
+	boolean isScriptValid();
 }

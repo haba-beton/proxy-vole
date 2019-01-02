@@ -9,7 +9,6 @@ import java.io.UnsupportedEncodingException;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.Proxy;
-import java.net.URISyntaxException;
 import java.net.URL;
 
 import com.github.markusbernhardt.proxy.util.Logger;
@@ -19,6 +18,7 @@ import com.github.markusbernhardt.proxy.util.Logger.LogLevel;
  * Script source that will load the content of a PAC file from an webserver. The
  * script content is cached once it was downloaded.
  *
+ * @author Franz Bartlechner, Copyright 2019
  * @author Markus Bernhardt, Copyright 2016
  * @author Bernd Rosstauscher, Copyright 2009
  ****************************************************************************/
@@ -61,7 +61,7 @@ public class UrlPacScriptSource implements PacScriptSource {
 				// info
 				this.expireAtMillis = 0;
 
-				if (this.scriptUrl.startsWith("file:/") || this.scriptUrl.indexOf(":/") == -1) {
+				if (this.scriptUrl.startsWith("file:/") || !this.scriptUrl.contains(":/")) {
 					this.scriptContent = readPacFileContent(this.scriptUrl);
 				} else {
 					this.scriptContent = downloadPacContent(this.scriptUrl);
@@ -79,18 +79,18 @@ public class UrlPacScriptSource implements PacScriptSource {
 	/*************************************************************************
 	 * Reads a PAC script from a local file.
 	 * 
-	 * @param scriptUrl
+	 * @param scriptUrl x
 	 * @return the content of the script file.
-	 * @throws IOException
-	 * @throws URISyntaxException
+	 * @throws IOException x
 	 ************************************************************************/
 
 	private String readPacFileContent(String scriptUrl) throws IOException {
 		try {
-			File file = null;
-			if (scriptUrl.indexOf(":/") == -1) {
+			File file;
+			if (!scriptUrl.contains(":/")) {
 				file = new File(scriptUrl);
-			} else {
+			}
+			else {
 				file = new File(new URL(scriptUrl).toURI());
 			}
 			BufferedReader r = new BufferedReader(new FileReader(file));
@@ -164,7 +164,7 @@ public class UrlPacScriptSource implements PacScriptSource {
 	 * @param r
 	 *            to read from.
 	 * @return the complete PAC file content.
-	 * @throws IOException
+	 * @throws IOException x
 	 ************************************************************************/
 
 	private String readAllContent(BufferedReader r) throws IOException {
@@ -179,27 +179,24 @@ public class UrlPacScriptSource implements PacScriptSource {
 	/*************************************************************************
 	 * Build a BufferedReader around the open HTTP connection.
 	 * 
-	 * @param con
-	 *            to read from
+	 * @param con to read from
 	 * @return the BufferedReader.
-	 * @throws UnsupportedEncodingException
-	 * @throws IOException
+	 * @throws UnsupportedEncodingException x
+	 * @throws IOException x
 	 ************************************************************************/
 
 	private BufferedReader getReader(HttpURLConnection con) throws UnsupportedEncodingException, IOException {
 		String charsetName = parseCharsetFromHeader(con.getContentType());
-		BufferedReader r = new BufferedReader(new InputStreamReader(con.getInputStream(), charsetName));
-		return r;
+    return new BufferedReader(new InputStreamReader(con.getInputStream(), charsetName));
 	}
 
 	/*************************************************************************
 	 * Configure the connection to download from.
 	 * 
-	 * @param url
-	 *            to get the pac file content from
+	 * @param url to get the pac file content from
 	 * @return a HTTPUrlConnecion to this url.
-	 * @throws IOException
-	 * @throws MalformedURLException
+	 * @throws IOException x
+	 * @throws MalformedURLException x
 	 ************************************************************************/
 
 	private HttpURLConnection setupHTTPConnection(String url) throws IOException, MalformedURLException {
@@ -250,7 +247,7 @@ public class UrlPacScriptSource implements PacScriptSource {
 		if (contentType != null) {
 			String[] paramList = contentType.split(";");
 			for (String param : paramList) {
-				if (param.toLowerCase().trim().startsWith("charset") && param.indexOf("=") != -1) {
+				if (param.toLowerCase().trim().startsWith("charset") && param.contains("=")) {
 					result = param.substring(param.indexOf("=") + 1).trim();
 				}
 			}
@@ -276,12 +273,11 @@ public class UrlPacScriptSource implements PacScriptSource {
 		try {
 			String script = getScriptContent();
 			if (script == null || script.trim().length() == 0) {
-				Logger.log(getClass(), LogLevel.DEBUG, "PAC script is empty. Skipping script!");
+				Logger.log(getClass(), LogLevel.DEBUG,"PAC script is empty. Skipping script!");
 				return false;
 			}
-			if (script.indexOf("FindProxyForURL") == -1) {
-				Logger.log(getClass(), LogLevel.DEBUG,
-				        "PAC script entry point FindProxyForURL not found. Skipping script!");
+			if (!script.contains("FindProxyForURL")) {
+				Logger.log(getClass(), LogLevel.DEBUG,"PAC script entry point FindProxyForURL not found. Skipping script!");
 				return false;
 			}
 			return true;

@@ -5,6 +5,7 @@ import java.net.URI;
 /*****************************************************************************
  * Interface for an URI filter.
  *
+ * @author Franz Bartlechner, Copyright 2019
  * @author Markus Bernhardt, Copyright 2016
  * @author Bernd Rosstauscher, Copyright 2009
  ****************************************************************************/
@@ -19,6 +20,5 @@ public interface UriFilter {
 	 * @return true if it matches the criteria else false.
 	 ************************************************************************/
 
-	public abstract boolean accept(URI uri);
-
+	boolean accept(URI uri);
 }

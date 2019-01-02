@@ -79,7 +79,7 @@ public class WinProxySearchStrategy extends CommonWindowsSearchStrategy {
 	/*************************************************************************
 	 * Parses the proxy settings into an ProxySelector.
 	 *
-	 * @param winProxySettings
+	 * @param winProxyConfig
 	 *            the settings to use.
 	 * @return a ProxySelector, null if no settings are set.
 	 * @throws ProxyException
@@ -99,7 +99,6 @@ public class WinProxySearchStrategy extends CommonWindowsSearchStrategy {
 
 		ProtocolDispatchSelector ps = buildProtocolDispatchSelector(p);
 
-		ProxySelector result = setByPassListOnSelector(bypassList, ps);
-		return result;
+    return setByPassListOnSelector(bypassList, ps);
 	}
 }

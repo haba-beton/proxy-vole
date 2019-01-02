@@ -211,11 +211,9 @@ public class GnomeDConfProxySearchStrategy implements ProxySearchStrategy {
 	/*************************************************************************
 	 * Install a http proxy from the given settings.
 	 * 
-	 * @param settings
-	 *            to inspect
-	 * @param ps
-	 *            the dispatch selector to configure.
-	 * @throws NumberFormatException
+	 * @param settings to inspect
+	 * @param ps the dispatch selector to configure.
+	 * @throws NumberFormatException x
 	 ************************************************************************/
 
 	private void installHttpSelector(Properties settings, ProtocolDispatchSelector ps) throws NumberFormatException {
@@ -230,11 +228,9 @@ public class GnomeDConfProxySearchStrategy implements ProxySearchStrategy {
 	/*************************************************************************
 	 * Install a socks proxy from the given settings.
 	 * 
-	 * @param settings
-	 *            to inspect
-	 * @param ps
-	 *            the dispatch selector to configure.
-	 * @throws NumberFormatException
+	 * @param settings to inspect
+	 * @param ps the dispatch selector to configure.
+	 * @throws NumberFormatException x
 	 ************************************************************************/
 
 	private void installSocksSelector(Properties settings, ProtocolDispatchSelector ps) throws NumberFormatException {
@@ -247,9 +243,9 @@ public class GnomeDConfProxySearchStrategy implements ProxySearchStrategy {
 	}
 
 	/*************************************************************************
-	 * @param settings
-	 * @param ps
-	 * @throws NumberFormatException
+	 * @param settings x
+	 * @param ps x
+	 * @throws NumberFormatException x
 	 ************************************************************************/
 
 	private void installFtpSelector(Properties settings, ProtocolDispatchSelector ps) throws NumberFormatException {
@@ -262,9 +258,9 @@ public class GnomeDConfProxySearchStrategy implements ProxySearchStrategy {
 	}
 
 	/*************************************************************************
-	 * @param settings
-	 * @param ps
-	 * @throws NumberFormatException
+	 * @param settings ?
+	 * @param ps ?
+	 * @throws NumberFormatException ?
 	 ************************************************************************/
 
 	private void installSecureSelector(Properties settings, ProtocolDispatchSelector ps) throws NumberFormatException {
@@ -280,8 +276,6 @@ public class GnomeDConfProxySearchStrategy implements ProxySearchStrategy {
 	/*************************************************************************
 	 * Parse the settings file and extract all network.proxy.* settings from it.
 	 * 
-	 * @param context
-	 *            the gconf context to parse.
 	 * @param settings
 	 *            the settings object to fill.
 	 * @return the parsed properties.

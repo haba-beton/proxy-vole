@@ -7,6 +7,7 @@ import com.github.markusbernhardt.proxy.util.ProxyException;
 /*****************************************************************************
  * Interface for a proxy search strategy.
  *
+ * @author Franz Bartlechner, Copyright 2019
  * @author Markus Bernhardt, Copyright 2016
  * @author Bernd Rosstauscher, Copyright 2009
  ****************************************************************************/
@@ -21,7 +22,7 @@ public interface ProxySearchStrategy {
 	 *             on error
 	 ************************************************************************/
 
-	public ProxySelector getProxySelector() throws ProxyException;
+	ProxySelector getProxySelector() throws ProxyException;
 
 	/*************************************************************************
 	 * Gets the printable name of the search strategy.
@@ -29,5 +30,5 @@ public interface ProxySearchStrategy {
 	 * @return the printable name of the search strategy
 	 ************************************************************************/
 
-	public String getName();
+	String getName();
 }

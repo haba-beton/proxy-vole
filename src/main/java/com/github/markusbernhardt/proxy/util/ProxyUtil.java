@@ -40,7 +40,7 @@ public class ProxyUtil {
 
 		try {
 			// Protocol missing then assume http and provide it
-			if (proxyVar.indexOf(":/") == -1) {
+			if (!proxyVar.contains(":/")) {
 				proxyVar = "http://" + proxyVar;
 			}
 

@@ -25,7 +25,8 @@ import com.github.markusbernhardt.proxy.util.Logger.LogLevel;
 
 /***************************************************************************
  * Implementation of PAC JavaScript functions.
- * 
+ *
+ * @author Franz Bartlechner, Copyright 2019
  * @author Markus Bernhardt, Copyright 2016
  * @author Bernd Rosstauscher, Copyright 2009
  ***************************************************************************
@@ -61,7 +62,7 @@ public class PacScriptMethods implements ScriptMethods {
 	 ************************************************************************/
 
 	public boolean isPlainHostName(String host) {
-		return host.indexOf(".") < 0;
+		return !host.contains(".");
 	}
 
 	/*************************************************************************
@@ -102,11 +103,13 @@ public class PacScriptMethods implements ScriptMethods {
 	 * @return true if resolvable else false.
 	 ************************************************************************/
 
-	public boolean isResolvable(String host) {
+	@SuppressWarnings("ResultOfMethodCallIgnored")
+  public boolean isResolvable(String host) {
 		try {
-			InetAddress.getByName(host).getHostAddress();
+      InetAddress.getByName(host).getHostAddress();
 			return true;
-		} catch (UnknownHostException ex) {
+		}
+		catch (UnknownHostException ex) {
 			Logger.log(JavaxPacScriptParser.class, LogLevel.DEBUG, "Hostname not resolveable {0}.", host);
 		}
 		return false;

@@ -9,6 +9,7 @@ import org.slf4j.LoggerFactory;
  * Simple logging support for the framework. You need to add a logging listener
  * that needs to send the logging events to a backend.
  *
+ * @author Franz Bartlechner, Copyright 2019
  * @author Markus Bernhardt, Copyright 2016
  * @author Bernd Rosstauscher, Copyright 2009
  ****************************************************************************/
@@ -38,7 +39,7 @@ public class Logger {
      *          the message parameters for the format string.
      ************************************************************************/
 
-    public void log(Class<?> clazz, LogLevel loglevel, String msg, Object... params);
+    void log(Class<?> clazz, LogLevel loglevel, String msg, Object... params);
 
   }
 

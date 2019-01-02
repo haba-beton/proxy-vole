@@ -10,7 +10,8 @@ import java.net.UnknownHostException;
 
 /**
  * This class represents a DHCP Message.
- * 
+ *
+ * @author Franz Bartlechner, Copyright 2019
  * @author Markus Bernhardt, Copyright 2016
  * @author Jason Goldschmidt, Nick Stone and Simon Frankenberger
  * @author Bernd Rosstauscher, Copyright 2009
@@ -444,8 +445,9 @@ public class DHCPMessage {
 			byte[] options = new byte[312];
 			inStream.readFully(options, 0, 312);
 			this.optionsList.internalize(options);
-		} catch (IOException e) {
-			System.err.println(e);
+		}
+		catch (IOException e) {
+			e.printStackTrace();
 		}
 	}
 
@@ -487,21 +489,21 @@ public class DHCPMessage {
 			outStream.write(this.sname, 0, 64);
 			outStream.write(this.file, 0, 128);
 
-			byte[] options = new byte[312];
+			byte[] options;
 			if (this.optionsList == null) {
 				initialize();
 			}
 
 			options = this.optionsList.externalize();
 			outStream.write(options, 0, 312);
-		} catch (IOException e) {
-			System.err.println(e);
+		}
+		catch (IOException e) {
+		  e.printStackTrace();
 		}
 
 		// extract the byte array from the Stream
-		byte data[] = outBStream.toByteArray();
 
-		return data;
+    return outBStream.toByteArray();
 	}
 
 	/**
@@ -540,9 +542,10 @@ public class DHCPMessage {
 			}
 
 			this.optionsList.internalize(options);
-		} catch (IOException e) {
-			System.err.println(e);
-		} // end catch
+		}
+		catch (IOException e) {
+			e.printStackTrace();
+		}
 
 		return this;
 	}
@@ -708,8 +711,9 @@ public class DHCPMessage {
 	public void setDestinationHost(String inHost) {
 		try {
 			this.destination_IP = InetAddress.getByName(inHost);
-		} catch (Exception e) {
-			System.err.println(e);
+		}
+		catch (Exception e) {
+			e.printStackTrace();
 		}
 	}
 

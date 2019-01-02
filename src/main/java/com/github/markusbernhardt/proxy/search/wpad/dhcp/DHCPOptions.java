@@ -6,7 +6,8 @@ import java.util.Hashtable;
 /**
  * This class represents a linked list of options for a DHCP message. Its
  * purpose is to ease option handling such as add, remove or change.
- * 
+ *
+ * @author Franz Bartlechner, Copyright 2019
  * @author Markus Bernhardt, Copyright 2016
  * @author Jason Goldschmidt and Simon Frankenberger
  * @author Bernd Rosstauscher, Copyright 2009
@@ -106,7 +107,7 @@ public class DHCPOptions {
 		}
 	}
 
-	private Hashtable<Byte, DHCPOptionsEntry> optionsTable = null;
+	private Hashtable<Byte, DHCPOptionsEntry> optionsTable;
 
 	public DHCPOptions() {
 		this.optionsTable = new Hashtable<Byte, DHCPOptionsEntry>();
@@ -120,7 +121,7 @@ public class DHCPOptions {
 	 */
 
 	public void removeOption(byte entryCode) {
-		this.optionsTable.remove(new Byte(entryCode));
+		this.optionsTable.remove(entryCode);
 	}
 
 	/**
@@ -131,7 +132,7 @@ public class DHCPOptions {
 	 * @return true if option is set, otherwise false
 	 */
 	public boolean contains(byte entryCode) {
-		return this.optionsTable.containsKey(new Byte(entryCode));
+		return this.optionsTable.containsKey(entryCode);
 	}
 
 	/**
@@ -153,7 +154,7 @@ public class DHCPOptions {
 	 */
 	public byte[] getOption(byte entryCode) {
 		if (this.contains(entryCode)) {
-			DHCPOptionsEntry ent = this.optionsTable.get(new Byte(entryCode));
+			DHCPOptionsEntry ent = this.optionsTable.get(entryCode);
 			return ent.content;
 		} else {
 			return null;
@@ -170,7 +171,7 @@ public class DHCPOptions {
 	 */
 	public void setOption(byte entryCode, byte value[]) {
 		DHCPOptionsEntry opt = new DHCPOptionsEntry(entryCode, (byte) value.length, value);
-		this.optionsTable.put(new Byte(entryCode), opt);
+		this.optionsTable.put(entryCode, opt);
 	}
 
 	/**
@@ -186,9 +187,7 @@ public class DHCPOptions {
 	 */
 	private byte[] getArrayOption(int length, int position, byte options[]) {
 		byte value[] = new byte[length];
-		for (int i = 0; i < length; i++) {
-			value[i] = options[position + i];
-		}
+    System.arraycopy(options,position,value,0,length);
 		return value;
 	}
 
