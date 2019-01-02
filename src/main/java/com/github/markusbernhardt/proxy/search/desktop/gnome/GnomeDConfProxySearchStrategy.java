@@ -297,16 +297,19 @@ public class GnomeDConfProxySearchStrategy implements ProxySearchStrategy {
 			String value = line.substring(keySep + 1).replaceAll("'", "");
 
 			// TODO 30.03.2015 bros Test for IP6 compatibility
-			if (value.matches("\\[.*\\]")) {
-				value = value.replaceAll("\\[|\\]| ", "");
-			}
+			if (value.matches("\\[.*]")) {
+//      if (value.matches("\\[.*\\]")) {
+				value = value.replaceAll("[\\[\\] ]", "");
+//        value = value.replaceAll("\\[|\\]| ", "");
+      }
 
 			Logger.log(getClass(), LogLevel.TRACE, "prop is: {0}|{1}", entry, value);
 			settings.setProperty(entry, value);
 		}
 		try {
 			p.waitFor();
-		} catch (InterruptedException ex) {
+		}
+		catch (InterruptedException ex) {
 			Logger.log(getClass(), LogLevel.ERROR, ex.getMessage());
 		}
 		return settings;
