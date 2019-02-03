@@ -8,25 +8,25 @@
     <version>9</version>
   </parent>
 
-  <groupId>com.github.markusbernhardt</groupId>
+  <groupId>com.github.mrpipe</groupId>
   <artifactId>proxy-vole</artifactId>
-  <version>1.0.6-SNAPSHOT</version>
+  <version>1.0.7-SNAPSHOT</version>
 
   <name>Proxy Vole</name>
   <description>Proxy Vole is a Java library to auto detect the platform network proxy settings.</description>
-  <url>https://github.com/MarkusBernhardt/proxy-vole</url>
+  <url>https://github.com/mrpipe/proxy-vole</url>
 
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <downloadSources>true</downloadSources>
     <downloadJavadocs>true</downloadJavadocs>
-    <java.version>1.6</java.version>
+    <java.version>1.8</java.version>
   </properties>
 
   <scm>
-    <url>https://github.com/MarkusBernhardt/proxy-vole</url>
-    <connection>scm:git://github.com/MarkusBernhardt/proxy-vole.git</connection>
-    <developerConnection>scm:git:ssh://git@github.com/MarkusBernhardt/proxy-vole.git</developerConnection>
+    <url>https://github.com/mrpipe/proxy-vole</url>
+    <connection>scm:git://github.com/mrpipe/proxy-vole.git</connection>
+    <developerConnection>scm:git:ssh://git@github.com/mrpipe/proxy-vole.git</developerConnection>
   </scm>
 
   <licenses>
@@ -39,8 +39,8 @@
 
   <developers>
     <developer>
-      <name>Markus Bernhardt</name>
-      <email>markus.bernhardt@me.com</email>
+      <name>Franz Bartlechner</name>
+      <email>franz.bartlechner@haba-beton.de</email>
     </developer>
   </developers>
 
@@ -97,7 +97,7 @@
       <dependency>
         <groupId>org.javadelight</groupId>
         <artifactId>delight-nashorn-sandbox</artifactId>
-        <version>0.1.14</version>
+        <version>0.1.19</version>
       </dependency>
       <dependency>
         <groupId>org.slf4j</groupId>
