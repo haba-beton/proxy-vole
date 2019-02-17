@@ -52,7 +52,7 @@ public class UrlPacScriptSource implements PacScriptSource {
 	 * 
 	 * @see com.github.markusbernhardt.proxy.selector.pac.PacScriptSource#getScriptContent()
 	 ************************************************************************/
-
+  @Override
 	public synchronized String getScriptContent() throws IOException {
 		if (this.scriptContent == null
 		        || (this.expireAtMillis > 0 && this.expireAtMillis < System.currentTimeMillis())) {
@@ -93,18 +93,16 @@ public class UrlPacScriptSource implements PacScriptSource {
 			else {
 				file = new File(new URL(scriptUrl).toURI());
 			}
-			BufferedReader r = new BufferedReader(new FileReader(file));
-			StringBuilder result = new StringBuilder();
-			try {
-				String line;
-				while ((line = r.readLine()) != null) {
-					result.append(line).append("\n");
-				}
-			} finally {
-				r.close();
-			}
+      StringBuilder result = new StringBuilder();
+      try (BufferedReader r = new BufferedReader(new FileReader(file))) {
+        String line;
+        while ((line = r.readLine()) != null) {
+          result.append(line).append("\n");
+        }
+      }
 			return result.toString();
-		} catch (Exception e) {
+		}
+		catch (Exception e) {
 			System.out.println(System.getProperty("user.dir"));
 			Logger.log(getClass(), LogLevel.ERROR, "File reading error.", e);
 			throw new IOException(e.getMessage());
@@ -268,7 +266,7 @@ public class UrlPacScriptSource implements PacScriptSource {
 	 * 
 	 * @see com.github.markusbernhardt.proxy.selector.pac.PacScriptSource#isScriptValid()
 	 ************************************************************************/
-
+  @Override
 	public boolean isScriptValid() {
 		try {
 			String script = getScriptContent();

@@ -10,7 +10,6 @@ import java.net.UnknownHostException;
 import java.util.Arrays;
 import java.util.Calendar;
 import java.util.Collections;
-import java.util.Comparator;
 import java.util.Date;
 import java.util.Enumeration;
 import java.util.HashMap;
@@ -39,11 +38,9 @@ public class PacScriptMethods implements ScriptMethods {
 
 	private final static String GMT = "GMT";
 
-	private final static List<String> DAYS = Collections
-	        .unmodifiableList(Arrays.asList("SUN", "MON", "TUE", "WED", "THU", "FRI", "SAT"));
+	private final static List<String> DAYS = Collections.unmodifiableList(Arrays.asList("SUN", "MON", "TUE", "WED", "THU", "FRI", "SAT"));
 
-	private final static List<String> MONTH = Collections.unmodifiableList(
-	        Arrays.asList("JAN", "FEB", "MAR", "APR", "MAY", "JUN", "JUL", "AUG", "SEP", "OCT", "NOV", "DEC"));
+	private final static List<String> MONTH = Collections.unmodifiableList(Arrays.asList("JAN", "FEB", "MAR", "APR", "MAY", "JUN", "JUL", "AUG", "SEP", "OCT", "NOV", "DEC"));
 
 	private Calendar currentTime;
 
@@ -391,7 +388,7 @@ public class PacScriptMethods implements ScriptMethods {
 	        Object gmt) {
 
 		// Guess the parameter meanings.
-		Map<String, Integer> params = new HashMap<String, Integer>();
+		Map<String, Integer> params = new HashMap<>();
 		parseDateParam(params, day1);
 		parseDateParam(params, month1);
 		parseDateParam(params, year1);
@@ -683,14 +680,12 @@ public class PacScriptMethods implements ScriptMethods {
 		}
 		try {
 			String[] ipAddressToken = ipAddressList.split(";");
-			TreeMap<byte[], String> sorting = new TreeMap<byte[], String>(new Comparator<byte[]>() {
-				public int compare(byte[] b1, byte[] b2) {
-					if (b1.length != b2.length) {
-						return b2.length - b1.length;
-					}
-					return new BigInteger(b1).compareTo(new BigInteger(b2));
-				}
-			});
+			TreeMap<byte[], String> sorting = new TreeMap<>((b1,b2) -> {
+        if (b1.length != b2.length) {
+          return b2.length - b1.length;
+        }
+        return new BigInteger(b1).compareTo(new BigInteger(b2));
+      });
 
 			for (String ip : ipAddressToken) {
 				String cleanIP = ip.trim();

@@ -168,9 +168,9 @@ public class FirefoxProxySearchStrategy implements ProxySearchStrategy {
 
 	public Properties readSettings() throws ProxyException {
 		try {
-			Properties settings = settingsParser.parseSettings(profileScanner);
-			return settings;
-		} catch (IOException e) {
+      return settingsParser.parseSettings(profileScanner);
+		}
+		catch (IOException e) {
 			throw new ProxyException("No Firefox installation found");
 		}
 	}
@@ -197,9 +197,9 @@ public class FirefoxProxySearchStrategy implements ProxySearchStrategy {
 	}
 
 	/*************************************************************************
-	 * @param ps
-	 * @param settings
-	 * @throws NumberFormatException
+	 * @param ps ?
+	 * @param settings ?
+	 * @throws NumberFormatException ?
 	 ************************************************************************/
 
 	private void installFtpProxy(ProtocolDispatchSelector ps, Properties settings) throws NumberFormatException {
@@ -207,9 +207,9 @@ public class FirefoxProxySearchStrategy implements ProxySearchStrategy {
 	}
 
 	/*************************************************************************
-	 * @param ps
-	 * @param settings
-	 * @throws NumberFormatException
+	 * @param ps ?
+	 * @param settings ?
+	 * @throws NumberFormatException ?
 	 ************************************************************************/
 
 	private void installHttpProxy(ProtocolDispatchSelector ps, Properties settings) throws NumberFormatException {
@@ -230,7 +230,7 @@ public class FirefoxProxySearchStrategy implements ProxySearchStrategy {
 	}
 
 	/*************************************************************************
-	 * @param ps
+	 * @param ps ?
 	 ************************************************************************/
 
 	private void installSharedProxy(ProtocolDispatchSelector ps) {
@@ -241,9 +241,9 @@ public class FirefoxProxySearchStrategy implements ProxySearchStrategy {
 	}
 
 	/*************************************************************************
-	 * @param ps
-	 * @param settings
-	 * @throws NumberFormatException
+	 * @param ps ?
+	 * @param settings ?
+	 * @throws NumberFormatException ?
 	 ************************************************************************/
 
 	private void installSocksProxy(ProtocolDispatchSelector ps, Properties settings) throws NumberFormatException {
@@ -256,9 +256,9 @@ public class FirefoxProxySearchStrategy implements ProxySearchStrategy {
 	}
 
 	/*************************************************************************
-	 * @param ps
-	 * @param settings
-	 * @throws NumberFormatException
+	 * @param ps ?
+	 * @param settings ?
+	 * @throws NumberFormatException ?
 	 ************************************************************************/
 
 	private void installSecureProxy(ProtocolDispatchSelector ps, Properties settings) throws NumberFormatException {
@@ -281,7 +281,7 @@ public class FirefoxProxySearchStrategy implements ProxySearchStrategy {
 	 *            to read the config from.
 	 * @param protocol
 	 *            to configure.
-	 * @throws NumberFormatException
+	 * @throws NumberFormatException ?
 	 ************************************************************************/
 
 	private void installSelectorForProtocol(ProtocolDispatchSelector ps, Properties settings, String protocol)

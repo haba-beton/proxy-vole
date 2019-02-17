@@ -10,7 +10,7 @@
 
   <groupId>com.github.mrpipe</groupId>
   <artifactId>proxy-vole</artifactId>
-  <version>1.0.7-SNAPSHOT</version>
+  <version>1.0.7</version>
 
   <name>Proxy Vole</name>
   <description>Proxy Vole is a Java library to auto detect the platform network proxy settings.</description>
@@ -97,7 +97,7 @@
       <dependency>
         <groupId>org.javadelight</groupId>
         <artifactId>delight-nashorn-sandbox</artifactId>
-        <version>0.1.19</version>
+        <version>0.1.21</version>
       </dependency>
       <dependency>
         <groupId>org.slf4j</groupId>

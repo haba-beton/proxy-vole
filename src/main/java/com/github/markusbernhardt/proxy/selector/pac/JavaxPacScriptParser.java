@@ -22,7 +22,7 @@ import java.lang.reflect.Method;
  ****************************************************************************/
 public class JavaxPacScriptParser implements PacScriptParser {
 	static final String SCRIPT_METHODS_OBJECT = "__pacutil";
-	static final String SOURCE_NAME = JavaxPacScriptParser.class.getName();
+	static final String SOURCE_NAME           = JavaxPacScriptParser.class.getName();
 
 	private final PacScriptSource source;
 	private final NashornSandbox engine;
@@ -48,13 +48,13 @@ public class JavaxPacScriptParser implements PacScriptParser {
 	 *             on error.
 	 ************************************************************************/
 	private NashornSandbox setupEngine() throws ProxyEvaluationException {
-        NashornSandbox engine = NashornSandboxes.create();
-		engine.inject(SCRIPT_METHODS_OBJECT, new PacScriptMethods());
-		// allow String
+	  NashornSandbox engine = NashornSandboxes.create();
+		engine.inject(SCRIPT_METHODS_OBJECT,new PacScriptMethods());
+
 		engine.allow(String.class);
 
 		Class<?> scriptMethodsClazz = ScriptMethods.class;
-		Method[] scriptMethods = scriptMethodsClazz.getMethods();
+		Method[] scriptMethods      = scriptMethodsClazz.getMethods();
 
 		for (Method method : scriptMethods) {
 			String name = method.getName();
@@ -78,7 +78,8 @@ public class JavaxPacScriptParser implements PacScriptParser {
 			try {
 				// Add functions with calls to Java object to global scope 
 				engine.eval(toEval.toString());
-			} catch (Exception e) {
+			}
+			catch (Exception e) {
 				Logger.log(getClass(), LogLevel.ERROR, "JS evaluation error when creating alias for " + name + ".", e);
 				throw new ProxyEvaluationException("Error setting up script engine", e);
 			}
@@ -132,15 +133,13 @@ public class JavaxPacScriptParser implements PacScriptParser {
 	 ************************************************************************/
 	public String evaluate(String url, String host) throws ProxyEvaluationException {
 		try {
-			StringBuilder script = new StringBuilder(this.source.getScriptContent());
-			String evalMethod = " ;FindProxyForURL (\"" + url + "\",\"" + host + "\")";
-			script.append(evalMethod);
-			Object result = this.engine.eval(script.toString());
+      String evalMethod = " ;FindProxyForURL (\"" + url + "\",\"" + host + "\")";
+      Object result = this.engine.eval(this.source.getScriptContent() + evalMethod);
 			return (String) result;
-		} catch (Exception e) {
+		}
+		catch (Exception e) {
 			Logger.log(getClass(), LogLevel.ERROR, "JS evaluation error.", e);
 			throw new ProxyEvaluationException("Error while executing PAC script: " + e.getMessage(), e);
 		}
-
 	}
 }

@@ -49,7 +49,7 @@ public class Logger {
 
   public class Slf4jLogBackEnd implements LogBackEnd {
 
-    protected Map<Class<?>, org.slf4j.Logger> loggers = new ConcurrentHashMap<Class<?>, org.slf4j.Logger>();
+    protected Map<Class<?>, org.slf4j.Logger> loggers = new ConcurrentHashMap<>();
 
     /**
      * {@inheritDoc}

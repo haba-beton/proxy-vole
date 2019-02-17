@@ -31,11 +31,11 @@ public interface WinHttp extends StdCallLibrary {
 	 */
 	int WINHTTP_ACCESS_TYPE_DEFAULT_PROXY = 0;
 
-        /**
-         * Returned if WinHTTP was unable to discover the URL of the 
-         * Proxy Auto-Configuration (PAC) file using the WPAD method.
-         */
-        int ERROR_WINHTTP_AUTODETECTION_FAILED = 12180;
+  /**
+   * Returned if WinHTTP was unable to discover the URL of the
+   * Proxy Auto-Configuration (PAC) file using the WPAD method.
+   */
+  int ERROR_WINHTTP_AUTODETECTION_FAILED = 12180;
         
         
 	/**
@@ -82,9 +82,7 @@ public interface WinHttp extends StdCallLibrary {
 	 * @return {@code true} if successful; otherwise, {@code false}.
          * @see WinHttpHelpers#detectAutoProxyConfigUrl
 	 */
-	boolean WinHttpDetectAutoProxyConfigUrl(
-                WinDef.DWORD dwAutoDetectFlags, 
-            WTypes2.LPWSTRByReference ppwszAutoConfigUrl) throws LastErrorException;
+	boolean WinHttpDetectAutoProxyConfigUrl(WinDef.DWORD dwAutoDetectFlags, WTypes2.LPWSTRByReference ppwszAutoConfigUrl) throws LastErrorException;
 
 	/**
 	 * The WinHttpGetDefaultProxyConfiguration function retrieves the default
